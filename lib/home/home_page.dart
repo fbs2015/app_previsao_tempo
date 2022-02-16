@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http_weather/service/data_service.dart';
+import 'package:http_weather/service/weather.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({ Key? key }) : super(key: key);
@@ -9,6 +11,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   TextEditingController controller = TextEditingController();
+  DataService dataService = DataService();
+  Weather weather = Weather();
+  bool isFetch = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,19 +25,20 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
             children:[
+              isFetch ?
               Column(
                 children:[
-                Icon(Icons.cloud, size: 60),
+                Image.network('http://openweathermap.org/img/wn/${weather.icon}@2x.png'),
                 Text(
-                  '45.46º', 
+                  '${weather.temp}ª', 
                   style: Theme.of(context).textTheme.headline2,
                 ),
                 Text(
-                  'chuvoso',
+                  weather.description,
                    style:Theme.of(context).textTheme.headline4,
                   ),
                 ],
-              ),
+              ) : SizedBox(),
               Container(
                 width: 150,
                 padding: EdgeInsets.symmetric(vertical: 50),
@@ -42,7 +49,13 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               ElevatedButton(
-                onPressed: (){}, 
+                onPressed: () async{
+                   isFetch = true;
+                   weather = await dataService.fetchData(controller.text);
+                   setState(() {
+                     
+                   });   
+                }, 
                 child: Text('Buscar'),
               )
             ],
