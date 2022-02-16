@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http_weather/service/data_service.dart';
-import 'package:http_weather/service/weather.dart';
+import 'package:http_weather/model/weather.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({ Key? key }) : super(key: key);
@@ -12,14 +12,14 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   TextEditingController controller = TextEditingController();
   DataService dataService = DataService();
-  Weather weather = Weather();
+  Weather weather = const Weather();
   bool isFetch = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(''),
+        title:const Text('Clima'),
       ),
       body: Center(
         child: Column(
@@ -38,14 +38,14 @@ class _HomePageState extends State<HomePage> {
                    style:Theme.of(context).textTheme.headline4,
                   ),
                 ],
-              ) : SizedBox(),
+              ) : const SizedBox(),
               Container(
                 width: 150,
-                padding: EdgeInsets.symmetric(vertical: 50),
+                padding: const EdgeInsets.symmetric(vertical: 50),
                 child: TextField(
                   controller: controller,
                   textAlign: TextAlign.center,
-                  decoration: InputDecoration(labelText: 'Cidade'),
+                  decoration: const InputDecoration(labelText: 'Cidade'),
                 ),
               ),
               ElevatedButton(
@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
                      
                    });   
                 }, 
-                child: Text('Buscar'),
+                child: const Text('Buscar'),
               )
             ],
         ),
