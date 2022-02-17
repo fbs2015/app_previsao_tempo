@@ -28,9 +28,10 @@ class _HomePageState extends State<HomePage> {
               isFetch ?
               Column(
                 children:[
-                Image.network('http://openweathermap.org/img/wn/${weather.icon}@2x.png'),
+                //Image.network('http://openweathermap.org/img/wn/${weather.icon}@2x.png'),
+                Image.network(weather.icon),
                 Text(
-                  '${weather.temp}ª', 
+                  '${weather.temp}º', 
                   style: Theme.of(context).textTheme.headline2,
                 ),
                 Text(

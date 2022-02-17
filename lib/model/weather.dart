@@ -14,11 +14,19 @@ class Weather {
   });
 
   factory Weather.fromJson(Map<String, dynamic> json) {
+    String checkedIcon = ''; 
+    if(json['weather'][0]['icon'] != null){
+      checkedIcon = 'http://openweathermap.org/img/wn/${json['weather'][0]['icon']}@2x.png';
+    }
+    
     return Weather(
       name: json['name'] ?? '',
       description: json['weather'][0]['description'] ?? '',
-      icon: json['weather'][0]['icon']  ?? '',
+      icon: checkedIcon,
       temp: json['main']['temp'] ?? 0,
     );
+
+    
   }
+  
 }
